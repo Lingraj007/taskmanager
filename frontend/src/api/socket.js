@@ -2,7 +2,8 @@ import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
 export function connectSocket(projectId, onMessageReceived) {
-  const socket = new SockJS("http://localhost:8081/ws");
+  const wsUrl = import.meta.env.VITE_WS_URL || "http://localhost:8081/ws";
+  const socket = new SockJS(wsUrl);
 
   const stompClient = new Client({
     webSocketFactory: () => socket,
